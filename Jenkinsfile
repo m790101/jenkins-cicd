@@ -4,7 +4,6 @@ pipeline {
     environment {
         scannerHome = tool name: 'scanner'
     }
-    
     stages {
         stage("Sonarqube Scanning") {
             steps {
@@ -21,9 +20,6 @@ pipeline {
                 }
             }
         }
-        
-    }
-    stages {
         stage('build'){
             steps {
                 script {
