@@ -9,10 +9,11 @@ pipeline {
         stage("Sonarqube Scanning") {
             steps {
                 script {
-                        withSonarQubeEnv('local-sonarqube') {
+                        withSonarQubeEnv('sonarqube') {
                             sh """
                                     ${scannerHome}/bin/sonar-scanner \
-                                        -Dsonar.sources=. \
+                                    -Dsonar.projectKey=jenkinscicd \
+                                        -Dsonar.sources=./src \
                                 fi;
                             """
                         }
