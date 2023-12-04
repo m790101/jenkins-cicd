@@ -20,7 +20,4 @@ pipeline {
             }
         }
     }
-    tools {
-        nodejs "nodejs-14.17.3"
-    }
 }
