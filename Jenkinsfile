@@ -4,7 +4,7 @@ pipeline {
     stages {
        stage('SonarQube Analysis') {
             def scannerHome = tool 'scanner';
-            withSonarQubeEnv() {
+                  withSonarQubeEnv() {
             sh """
             ${scannerHome}/bin/sonar-scanner \
             sonar-scanner \
@@ -14,6 +14,7 @@ pipeline {
             -Dsonar.token=sqa_ec393a359a9ccc7a661f42de0b9a149e8e99d7d3
             }
             """
+            }
         }
     }    
     stages {
