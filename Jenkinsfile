@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    tools {nodejs "nodejs"}
+    tools {nodejs "node"}
     environment {
         scannerHome = tool name: 'scanner'
     }
