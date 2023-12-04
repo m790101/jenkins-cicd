@@ -16,7 +16,6 @@ pipeline {
                                         -Dsonar.sources=. \
                                         -Dsonar.host.url=http://localhost:9000 \
                                         -Dsonar.token=sqa_ec393a359a9ccc7a661f42de0b9a149e8e99d7d3
-                                fi;
                             """
                         }
                 }
