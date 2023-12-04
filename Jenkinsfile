@@ -20,4 +20,5 @@ pipeline {
             }
         }
     }
+    tools {nodejs “node”}
 }
