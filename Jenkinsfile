@@ -15,7 +15,7 @@ pipeline {
         stage('deploy'){
             steps {
                 script {
-                    sh "echo deploy12"
+                    sh "echo deploy13"
                     // sh "scp -r dist/scic_ecover_fe/ tpiuser@10.20.30.211:/home/tpiuser/ecover/apache-tomcat-9.0.65/webapps/"
                 }
             }
