@@ -9,6 +9,7 @@ pipeline {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
         registry = "m790101/jenkins-test"
         dockerImage = ''
+        DOCKER_PASS = 'dockerhub'
     }
     stages {
         // stage("Sonarqube Scanning") {
@@ -45,13 +46,34 @@ pipeline {
                 }
             }
         }
-        stage('Build doker image') {
+        stage("Build & Push Docker Image") {
             steps {
                 script {
-                dockerImage = docker.build 'm790101/jenkins-test:latest'
+                    docker.withRegistry('',DOCKER_PASS) {
+                        docker_image = docker.build "${registry}"
+                    }
+
+                    // docker.withRegistry('',DOCKER_PASS) {
+                    //     docker_image.push("${IMAGE_TAG}")
+                    //     docker_image.push('latest')
+                    // }
                 }
             }
+
         }
+        // stage('Cloning our Git') {
+        //     steps {
+        //         git 'https://github.com/YourGithubAccount/YourGithubRepository.git'
+        //     }
+        // }
+        
+        // stage('Build doker image') {
+        //     steps {
+        //         script {
+        //         dockerImage = docker.build 'm790101/jenkins-test:latest'
+        //         }
+        //     }
+        // }
         stage('Login') {
             steps {
                 sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR --password-$DOCKERHUB_CREDENTIALS_PSW'
