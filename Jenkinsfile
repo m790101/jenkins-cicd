@@ -47,7 +47,7 @@ pipeline {
         }
         stage('Build doker image') {
             steps {
-                dockerImage = docker.build registry + ":latest"
+                dockerImage = docker.build registry
             }
         }
         stage('Login') {
