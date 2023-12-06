@@ -62,7 +62,11 @@ pipeline {
             // }
         stage('Login') {
             steps {
-                sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                    dockerImage.push()
+                    }
+                // sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
             }
         }
         stage('Push docker image') {
