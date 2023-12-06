@@ -10,6 +10,7 @@ pipeline {
         registry = "m790101/jenkins-test"
         dockerImage = ''
         DOCKER_PASS = 'dockerhub'
+        HOME = "${env.WORKSPACE}"
     }
     stages {
         // stage("Sonarqube Scanning") {
@@ -53,10 +54,10 @@ pipeline {
         }
         stage('Build doker image') {
             steps {
-                sh 'docker build -t m790101/jenkins-test:latest .'
-                // script {
-                // dockerImage = docker.build("m790101/jenkins-test:latest")
-                // }
+                // sh 'docker build -t m790101/jenkins-test:latest .'
+                script {
+                dockerImage = docker.build("m790101/jenkins-test:latest")
+                }
             }
         }
         stage('Login') {
