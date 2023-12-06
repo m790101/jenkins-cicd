@@ -48,7 +48,7 @@ pipeline {
         }
         stage('Clone repository') {
         steps {
-                checkout scm
+                git 'https://github.com/m790101/jenkins-cicd.git'
             }
         }
         stage('Build doker image') {
