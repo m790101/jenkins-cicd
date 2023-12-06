@@ -46,34 +46,22 @@ pipeline {
                 }
             }
         }
-        stage("Build & Push Docker Image") {
-            steps {
-                script {
-                    docker.withRegistry('',DOCKER_PASS) {
-                        docker_image = docker.build "${registry}"
-                    }
-
-                    // docker.withRegistry('',DOCKER_PASS) {
-                    //     docker_image.push("${IMAGE_TAG}")
-                    //     docker_image.push('latest')
-                    // }
-                }
-            }
-
+        stage('Clone repository') {
+        /* Let's make sure we have the repository cloned to our workspace */
+        checkout scm
         }
         // stage('Cloning our Git') {
         //     steps {
         //         git 'https://github.com/YourGithubAccount/YourGithubRepository.git'
         //     }
         // }
-        
-        // stage('Build doker image') {
-        //     steps {
-        //         script {
-        //         dockerImage = docker.build 'm790101/jenkins-test:latest'
-        //         }
-        //     }
-        // }
+        stage('Build doker image') {
+            steps {
+                script {
+                dockerImage = docker.build 'm790101/jenkins-test:latest'
+                }
+            }
+        }
         stage('Login') {
             steps {
                 sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR --password-$DOCKERHUB_CREDENTIALS_PSW'
