@@ -53,15 +53,10 @@ pipeline {
                 checkout scm
             }
         }
-        // stage('Cloning our Git') {
-        //     steps {
-        //         git 'https://github.com/YourGithubAccount/YourGithubRepository.git'
-        //     }
-        // }
         stage('Build doker image') {
             steps {
                 script {
-                dockerImage = docker.build 'm790101/jenkins-test:latest'
+                dockerImage = docker.build('m790101/jenkins-test:latest')
                 }
             }
         }
