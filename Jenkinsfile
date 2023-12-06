@@ -48,9 +48,9 @@ pipeline {
         }
         stage('Clone repository') {
         steps {
-                 git url: 'https://github.com/m790101/jenkins-cicd.git', branch: 'main'
+                 git url: 'https://github.com/SaurabhDahibhate/django_jenkins.git', branch: 'master'
             }
-            }
+            
         }
             stage('Build doker image') {
                 steps {
