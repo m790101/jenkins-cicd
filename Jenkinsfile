@@ -54,10 +54,10 @@ pipeline {
         }
         stage('Build doker image') {
             steps {
-                // sh 'docker build -t m790101/jenkins-test:latest .'
-                script {
-                dockerImage = docker.build("m790101/jenkins-test:latest")
-                }
+                sh 'docker build -t m790101/jenkins-test .'
+                // script {
+                // dockerImage = docker.build(registry)
+                // }
             }
         }
         stage('Login') {
