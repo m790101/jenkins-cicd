@@ -52,14 +52,14 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Build doker image') {
-            steps {
-                sh 'docker build -t m790101/jenkins-test .'
-                // script {
-                // dockerImage = docker.build(registry)
-                // }
-            }
-        }
+            // stage('Build doker image') {
+            //     steps {
+            //         sh 'docker build -t m790101/jenkins-test .'
+            //         // script {
+            //         // dockerImage = docker.build(registry)
+            //         // }
+            //     }
+            // }
         stage('Login') {
             steps {
                 sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR --password-$DOCKERHUB_CREDENTIALS_PSW'
