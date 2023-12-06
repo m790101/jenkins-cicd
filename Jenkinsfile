@@ -2,7 +2,6 @@ pipeline {
     agent any
     tools {
         nodejs "node"
-        dockerTool "docker"
     }
     environment {
         scannerHome = tool name: 'scanner'
@@ -49,17 +48,18 @@ pipeline {
         }
         stage('Clone repository') {
         steps {
-                checkout scm
+                 git url: 'https://github.com/m790101/jenkins-cicd.git', branch: 'main'
+            }
             }
         }
-            // stage('Build doker image') {
-            //     steps {
-            //         sh 'docker build -t m790101/jenkins-test .'
-            //         // script {
-            //         // dockerImage = docker.build(registry)
-            //         // }
-            //     }
-            // }
+            stage('Build doker image') {
+                steps {
+                    sh 'docker build -t m790101/jenkins-test .'
+                    // script {
+                    // dockerImage = docker.build(registry)
+                    // }
+                }
+            }
         stage('Login') {
             steps {
                 sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR --password-$DOCKERHUB_CREDENTIALS_PSW'
