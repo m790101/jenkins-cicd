@@ -48,16 +48,15 @@ pipeline {
         }
         stage('Clone repository') {
         steps {
-                // Checkout the source code from your version control system
-                // Replace the repository URL and credentials as needed
                 checkout scm
             }
         }
         stage('Build doker image') {
             steps {
-                script {
-                dockerImage = docker.build("m790101/jenkins-test:latest")
-                }
+                sh 'docker build -t m790101/jenkins-test:latest .'
+                // script {
+                // dockerImage = docker.build("m790101/jenkins-test:latest")
+                // }
             }
         }
         stage('Login') {
