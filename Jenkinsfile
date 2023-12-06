@@ -39,11 +39,28 @@ pipeline {
                 }
             }
         }
+        stage('Build doker image') {
+            steps {
+                // Build your Docker image
+                // Replace the Dockerfile path and image name as needed
+                sh 'docker build -t jenkins-test:latest .'
+            }
+        }
+        stage('Push docker image') {
+            steps {
+                // Push the Docker image to a container registry
+                // Replace the registry URL and credentials as needed
+                sh 'docker push m790101/jenkins-test:latest'
+            }
+        }
         stage('deploy'){
             steps {
                 script {
                     sh "echo deploy15"
-                    // sh "scp -r dist/scic_ecover_fe/ tpiuser@10.20.30.211:/home/tpiuser/ecover/apache-tomcat-9.0.65/webapps/"
+                    // Deploy the Docker container on GKE
+                    // Replace the GKE cluster name, namespace, and deployment name as needed
+                    // sh 'gcloud container clusters get-credentials your-gke-cluster --zone your-gke-zone --project your-gcp-project'
+                    // sh 'kubectl apply -f your-deployment.yaml -n your-namespace'
                 }
             }
         }
