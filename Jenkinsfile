@@ -1,25 +1,27 @@
 pipeline {
     agent any
     tools {nodejs "node"}
+    tools {docker "docker"}
     environment {
         scannerHome = tool name: 'scanner'
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
     }
-    stages {
-        stage("Sonarqube Scanning") {
-            steps {
-                script {
-                        withSonarQubeEnv('sonarqube') {
-                            sh """
-                                    ${scannerHome}/bin/sonar-scanner \
-                                    -Dsonar.projectKey=jenkinscicd \
-                                        -Dsonar.sources=. \
-                                        -Dsonar.host.url=http://localhost:9000 \
-                                        -Dsonar.token=sqa_ec393a359a9ccc7a661f42de0b9a149e8e99d7d3
-                            """
-                        }
-                }
-            }
-        }
+    // stages {
+    //     stage("Sonarqube Scanning") {
+    //         steps {
+    //             script {
+    //                     withSonarQubeEnv('sonarqube') {
+    //                         sh """
+    //                                 ${scannerHome}/bin/sonar-scanner \
+    //                                 -Dsonar.projectKey=jenkinscicd \
+    //                                     -Dsonar.sources=. \
+    //                                     -Dsonar.host.url=http://localhost:9000 \
+    //                                     -Dsonar.token=sqa_ec393a359a9ccc7a661f42de0b9a149e8e99d7d3
+    //                         """
+    //                     }
+    //             }
+    //         }
+    //     }
         // stage("Quality Gate") {
         //     steps {
         //         timeout(time: 1, unit: 'HOURS') {
@@ -37,6 +39,11 @@ pipeline {
                     sh "npm run build"
                     echo "build done"
                 }
+            }
+        }
+        stage('Login') {
+            steps {
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
             }
         }
         stage('Build doker image') {
