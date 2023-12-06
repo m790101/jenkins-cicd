@@ -47,8 +47,11 @@ pipeline {
             }
         }
         stage('Clone repository') {
-        /* Let's make sure we have the repository cloned to our workspace */
-        checkout scm
+        steps {
+                // Checkout the source code from your version control system
+                // Replace the repository URL and credentials as needed
+                checkout scm
+            }
         }
         // stage('Cloning our Git') {
         //     steps {
