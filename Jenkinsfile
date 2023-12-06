@@ -48,7 +48,7 @@ pipeline {
         stage('Build doker image') {
             steps {
                 script {
-                dockerImage = docker.build registry + ':latest'
+                dockerImage = docker.build 'm790101/jenkins-test:latest'
                 }
             }
         }
