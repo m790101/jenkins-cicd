@@ -1,6 +1,7 @@
 pipeline {
     agent any
     tools {nodejs "node"}
+    tools {docker "docker"}
     environment {
         scannerHome = tool name: 'scanner'
         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
