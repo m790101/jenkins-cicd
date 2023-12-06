@@ -47,7 +47,7 @@ pipeline {
             steps {
                 // Build your Docker image
                 // Replace the Dockerfile path and image name as needed
-                sh 'docker build -t jenkins-test:latest .'
+                sh 'docker build -t m790101/jenkins-test:latest .'
             }
         }
         stage('Login') {
