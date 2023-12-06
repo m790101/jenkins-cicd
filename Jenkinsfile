@@ -7,6 +7,8 @@ pipeline {
     environment {
         scannerHome = tool name: 'scanner'
         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+        registry = "m790101/jenkins-test"
+        dockerImage = ''
     }
     stages {
         // stage("Sonarqube Scanning") {
@@ -45,9 +47,7 @@ pipeline {
         }
         stage('Build doker image') {
             steps {
-                // Build your Docker image
-                // Replace the Dockerfile path and image name as needed
-                sh 'docker build -t m790101/jenkins-test:latest .'
+                dockerImage = docker.build registry + ":latest"
             }
         }
         stage('Login') {
