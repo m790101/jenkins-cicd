@@ -69,6 +69,7 @@ pipeline {
                 // sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
             }
         }
+        }
         stage('Push docker image') {
             steps {
                 // Push the Docker image to a container registry
