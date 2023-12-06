@@ -36,33 +36,33 @@ pipeline {
         //         }
         //     }
         // }
-        stage('build'){
-            steps {
-                script {
-                    sh "npm install"
-                    echo "install done"
-                    sh "npm run build"
-                    echo "build done"
-                }
-            }
-        }
-        stage('Clone repository') {
-        steps {
-                 git url: 'https://github.com/SaurabhDahibhate/django_jenkins.git', branch: 'master'
-            }
+        // stage('build'){
+        //     steps {
+        //         script {
+        //             sh "npm install"
+        //             echo "install done"
+        //             sh "npm run build"
+        //             echo "build done"
+        //         }
+        //     }
+        // }
+        // stage('Clone repository') {
+        // steps {
+        //          git url: 'https://github.com/SaurabhDahibhate/django_jenkins.git', branch: 'master'
+        //     }
             
-        }
-            stage('Build doker image') {
-                steps {
-                    sh 'docker build -t m790101/jenkins-test .'
-                    // script {
-                    // dockerImage = docker.build(registry)
-                    // }
-                }
-            }
+        // }
+            // stage('Build doker image') {
+            //     steps {
+            //         sh 'docker build -t m790101/jenkins-test .'
+            //         // script {
+            //         // dockerImage = docker.build(registry)
+            //         // }
+            //     }
+            // }
         stage('Login') {
             steps {
-                sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR --password $DOCKERHUB_CREDENTIALS_PSW'
+                sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
             }
         }
         stage('Push docker image') {
