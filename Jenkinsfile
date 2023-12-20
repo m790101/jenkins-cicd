@@ -5,11 +5,7 @@ pipeline {
     }
     environment {
         scannerHome = tool name: 'scanner'
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
-        registry = "m790101/jenkins-test"
-        dockerImage = ''
-        DOCKER_PASS = 'dockerhub'
-        HOME = "${env.WORKSPACE}"
+
     }
     stages {
         // stage("Sonarqube Scanning") {
@@ -36,55 +32,20 @@ pipeline {
         //         }
         //     }
         // }
-        // stage('build'){
-        //     steps {
-        //         script {
-        //             sh "npm install"
-        //             echo "install done"
-        //             sh "npm run build"
-        //             echo "build done"
-        //         }
-        //     }
-        // }
-        // stage('Clone repository') {
-        // steps {
-        //          git url: 'https://github.com/SaurabhDahibhate/django_jenkins.git', branch: 'master'
-        //     }
-            
-        // }
-            // stage('Build doker image') {
-            //     steps {
-            //         sh 'docker build -t m790101/jenkins-test .'
-            //         // script {
-            //         // dockerImage = docker.build(registry)
-            //         // }
-            //     }
-            // }
-        stage('Login') {
+        stage('build'){
             steps {
                 script {
-                    docker.withRegistry( '', registryCredential ) {
-                    dockerImage.push()
-                    }
-                // sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-            }
-        }
-        }
-        stage('Push docker image') {
-            steps {
-                // Push the Docker image to a container registry
-                // Replace the registry URL and credentials as needed
-                sh 'docker push m790101/jenkins-test:latest'
+                    sh "npm install"
+                    echo "install done"
+                    sh "npm run build"
+                    echo "build done"
+                }
             }
         }
         stage('deploy'){
             steps {
                 script {
-                    sh "echo deploy15"
-                    // Deploy the Docker container on GKE
-                    // Replace the GKE cluster name, namespace, and deployment name as needed
-                    // sh 'gcloud container clusters get-credentials your-gke-cluster --zone your-gke-zone --project your-gcp-project'
-                    // sh 'kubectl apply -f your-deployment.yaml -n your-namespace'
+                    sh "deploy with your own choice"
                 }
             }
         }
