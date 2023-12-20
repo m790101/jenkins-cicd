@@ -45,7 +45,7 @@ pipeline {
         stage('deploy'){
             steps {
                 script {
-                    sh "deploy with your own choice"
+                    echo "deploy with your own choice"
                 }
             }
         }
